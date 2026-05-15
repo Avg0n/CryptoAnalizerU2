@@ -1,13 +1,14 @@
 package com.javarush.goncharov;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import static com.javarush.goncharov.Cipher.alphabet;
-import static com.javarush.goncharov.Cipher.cezarCipher;
+import static com.javarush.goncharov.Cipher.caesarCipher;
 
 
 public class MainApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Логика для выбора режима работы, вызов соответствующих методов
         int mode;
         String inputPath;
@@ -28,11 +29,11 @@ public class MainApp {
         key = Integer.parseInt(console.nextLine());
 
         if (mode == 2) {
-            key = - key;
+            key = -key;
         }
 
 
-         cezarCipher(inputPath, outputPath, key);
+        caesarCipher(inputPath, outputPath, key);
 
     }
 }
