@@ -8,29 +8,23 @@ import java.nio.file.Path;
 
 
 public class Cipher {
+    private Cipher() {
+    }
+
     static final char[] alphabet = {'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з',
             'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
-            'ъ', 'ы', 'ь', 'э', 'ю', 'я', '.', ',', '«', '»', '"', '\'', ':', ';', '!', '?', '-', '+', '=', ' '};
+            'ъ', 'ы', 'ь', 'э', 'ю', 'я', '.', ',', '«', '»', '"', '\'', ':', ';', '!', '?', '-', '+',
+            '*', '/', '=', ' '};
 
-    //    public Cipher(char[] alphabet) {
-//        this.alphabet = alphabet;
-//    }
-    private Cipher() {
 
-    }
-//    public String encrypt(String pureText, int shift) {
-//        // Логика шифрования
-//
-//    }
-//    public String decrypt(String encryptedText, int shift) {
-//        // Логика расшифровки
-//    }
+
+    public static final int letters = alphabet.length;
 
     public static void caesarCipher(String input, String output, int key) throws IOException {
         Path inputPath = Path.of(input);
         Path outputPath = Path.of(output);
         if (Files.notExists(outputPath)) {
-            Files.createFile(outputPath); // Создаст пустой файл
+            Files.createFile(outputPath);
         }
         try (
                 BufferedReader reader = Files.newBufferedReader(inputPath);
@@ -43,9 +37,9 @@ public class Cipher {
                 if (readedChar == '\n') {
                     writer.write(readedChar);
                 } else {
-                    for (int i = 0; i < alphabet.length; i++) {
+                    for (int i = 0; i < letters; i++) {
                         if (alphabet[i] == readedChar) {
-                            int j = (i + key + alphabet.length) % alphabet.length;
+                            int j = (i + key + letters) % letters;
                             writer.write(alphabet[j]);
                         }
                     }
