@@ -18,7 +18,7 @@ public class Cipher {
 
 
 
-    public static final int letters = alphabet.length;
+    public static int letters = alphabet.length;
 
     public static void caesarCipher(String input, String output, int key) throws IOException {
         Path inputPath = Path.of(input);
@@ -39,7 +39,10 @@ public class Cipher {
                 } else {
                     for (int i = 0; i < letters; i++) {
                         if (alphabet[i] == readedChar) {
-                            int j = (i + key + letters) % letters;
+                            int j = (i + key) % letters;
+                            if (j < 0) {
+                                j += letters;
+                            }
                             writer.write(alphabet[j]);
                         }
                     }
