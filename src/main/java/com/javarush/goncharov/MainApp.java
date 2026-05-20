@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import com.javarush.goncharov.Constants.*;
 import com.javarush.goncharov.Cipher.*;
+import com.javarush.goncharov.BruteForce.*;
 
 
 public class MainApp {
@@ -11,7 +12,7 @@ public class MainApp {
         int mode;
         String inputPath;
         String outputPath;
-        int key;
+        int key = 0;
 
         Scanner console = new Scanner(System.in);
 
@@ -24,12 +25,20 @@ public class MainApp {
         System.out.println(Constants.PATH_TO_OUTPUT_FILE);
         outputPath = console.nextLine();
 
-        System.out.println(Constants.KEY_VALUE_LIMIT + (Cipher.letters - 1));
-        key = Integer.parseInt(console.nextLine());
-
-        if (mode == 2) {
-            key = -key;
+        if (mode == 1 || mode == 2) {
+            System.out.println(Constants.KEY_VALUE_LIMIT + (Cipher.letters - 1));
+            key = Integer.parseInt(console.nextLine()) % Cipher.letters;
         }
+
+        if (mode == 3) {
+            key = BruteForce.decryptByBruteForce(inputPath);
+        }
+
+        if (mode == 2 || mode == 3) {
+            key = - key;
+        }
+
+
 
 
         Cipher.caesarCipher(inputPath, outputPath, key);
