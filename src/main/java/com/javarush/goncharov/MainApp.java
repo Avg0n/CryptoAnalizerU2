@@ -14,7 +14,6 @@ public class MainApp {
         String inputPath;
         String outputPath;
         int key = 0;
-
         Scanner console = new Scanner(System.in);
 
         System.out.println(Constants.MODE);
@@ -30,17 +29,13 @@ public class MainApp {
             System.out.println(Constants.KEY_VALUE_LIMIT + Cipher.letters);
             key = Integer.parseInt(console.nextLine()) % Cipher.letters;
         }
-
         if (mode == 3) {
             key = BruteForce.decryptByBruteForce(inputPath);
         }
-
         if (mode == 2 || mode == 3) {
             key = -key;
         }
 
-
         Cipher.caesarCipher(inputPath, outputPath, key);
-
     }
 }

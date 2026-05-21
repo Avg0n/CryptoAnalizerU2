@@ -16,7 +16,6 @@ public class Cipher {
             'ъ', 'ы', 'ь', 'э', 'ю', 'я', '.', ',', '«', '»', '"', '\'', ':', ';', '!', '?', '-', '+',
             '*', '/', '=', ' '};
 
-
     public static int letters = alphabet.length;
 
     public static void caesarCipher(String input, String output, int key) throws IOException {

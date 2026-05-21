@@ -6,8 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class BruteForce {
-    public static int decryptByBruteForce(String input) {
 
+    public static int decryptByBruteForce(String input) {
         Path inputPath = Path.of(input);
         int selectedKey;
         int readedCharCode;
@@ -17,13 +17,9 @@ public class BruteForce {
         int maxCharIndex = 0;
         int maxCharCount = 0;
 
-
         for (int i = 0; i < Cipher.letters; i++) {
-
             charCount = 0;
-
             try (BufferedReader reader = Files.newBufferedReader(inputPath)) {
-
                 while ((readedCharCode = reader.read()) != -1) {
                     char readedChar = (char) readedCharCode;
                     readedChar = Character.toLowerCase(readedChar);
@@ -39,14 +35,12 @@ public class BruteForce {
                     maxCharCount = charCount;
                     maxCharIndex = i;
                 }
-
             } catch (IOException e) {
                 throw new MyExceptions(e.getMessage(), e);
             }
         }
 
         selectedKey = (maxCharIndex - mostUsedCharIndex + Cipher.letters) % Cipher.letters;
-
 
         return selectedKey;
     }
