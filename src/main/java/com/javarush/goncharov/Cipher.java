@@ -17,7 +17,6 @@ public class Cipher {
             '*', '/', '=', ' '};
 
 
-
     public static int letters = alphabet.length;
 
     public static void caesarCipher(String input, String output, int key) throws IOException {
@@ -48,7 +47,7 @@ public class Cipher {
                     }
                 }
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             throw new MyExceptions(e.getMessage(), e);
         }
     }

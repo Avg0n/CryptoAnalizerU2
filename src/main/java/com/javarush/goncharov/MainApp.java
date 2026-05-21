@@ -2,6 +2,7 @@ package com.javarush.goncharov;
 
 import java.io.IOException;
 import java.util.Scanner;
+
 import com.javarush.goncharov.Constants.*;
 import com.javarush.goncharov.Cipher.*;
 import com.javarush.goncharov.BruteForce.*;
@@ -35,10 +36,8 @@ public class MainApp {
         }
 
         if (mode == 2 || mode == 3) {
-            key = - key;
+            key = -key;
         }
-
-
 
 
         Cipher.caesarCipher(inputPath, outputPath, key);
