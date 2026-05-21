@@ -9,39 +9,50 @@ public class BruteForce {
     public static int decryptByBruteForce(String input) {
 
         Path inputPath = Path.of(input);
-        int key;
+        int selectedKey;
         int readedCharCode;
         char mostUsedChar = ' ';
         int mostUsedCharIndex = 0;
-        int charCount = 0;
+        int charCount;
         int maxCharIndex = 0;
         int maxCharCount = 0;
 
-        try (BufferedReader reader = Files.newBufferedReader(inputPath)) {
+
 
             for (int i = 0; i < Cipher.letters; i++) {
-                while ((readedCharCode = reader.read()) != -1) {
-                    char readedChar = (char) readedCharCode;
-                    readedChar = Character.toLowerCase(readedChar);
 
-                    if (Cipher.alphabet[i] == readedChar) {
-                        charCount++;
+                charCount = 0;
+
+                try (BufferedReader reader = Files.newBufferedReader(inputPath)) {
+
+                    while ((readedCharCode = reader.read()) != -1) {
+                        char readedChar = (char) readedCharCode;
+                        readedChar = Character.toLowerCase(readedChar);
+
+                        if (Cipher.alphabet[i] == readedChar) {
+                            charCount++;
+                        }
+                        if (Cipher.alphabet[i] == mostUsedChar) {
+                            mostUsedCharIndex = i;
+                        }
                     }
-                    if (Cipher.alphabet[i] == mostUsedChar) {
-                        mostUsedCharIndex = i;
+                    if (maxCharCount < charCount) {
+                        maxCharCount = charCount;
+                        maxCharIndex = i;
                     }
-                }
-                if (maxCharCount < charCount) {
-                    maxCharCount = charCount;
-                    maxCharIndex = i;
+
+                } catch (IOException e) {
+                    throw new MyExceptions(e.getMessage(), e);
                 }
             }
-        } catch (IOException e) {
-            throw new MyExceptions(e.getMessage(), e);
-        }
 
-        key = (maxCharIndex - mostUsedCharIndex + Cipher.letters) % Cipher.letters;
+        selectedKey = (maxCharIndex - mostUsedCharIndex + Cipher.letters) % Cipher.letters;
 
-        return key;
+        System.out.println("Selected key: " + selectedKey);
+        System.out.println("maxCharIndex: " + maxCharIndex);
+        System.out.println("mostUsedCharIndex: " + mostUsedCharIndex);
+
+
+        return selectedKey;
     }
 }

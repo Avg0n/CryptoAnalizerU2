@@ -26,7 +26,7 @@ public class MainApp {
         outputPath = console.nextLine();
 
         if (mode == 1 || mode == 2) {
-            System.out.println(Constants.KEY_VALUE_LIMIT + (Cipher.letters - 1));
+            System.out.println(Constants.KEY_VALUE_LIMIT + Cipher.letters);
             key = Integer.parseInt(console.nextLine()) % Cipher.letters;
         }
 
